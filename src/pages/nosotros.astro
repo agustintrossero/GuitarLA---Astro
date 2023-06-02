@@ -1,14 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import nosotros from '../img/nosotros.jpg'
 
 ---
 
 <Layout title="Nosotros" description="Sobre Nosotros, GuitarLa página de venta de productos y cursos">
 	<main class="contenedor">
 		<div class="heading">Nosotros</div>
+		<div class="contenido">
+			<img src={nosotros} alt="Imagen sobre Nosotros">
+			<div>
+				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi natus accusantium cupiditate voluptatibus quos illo esse quo placeat debitis! Deleniti atque recusandae delectus voluptates dolore? Praesentium amet cum numquam culpa!</p>
+				<p> Deleniti atque recusandae delectus voluptates dolore? Praesentium amet cum numquam culpa!</p>
+			</div>
+		</div>
 	</main>
 </Layout>
 
 <style>
-	
+	.contenido {
+    display: grid;
+    gap: 4rem;
+}
+	@media (min-width: 768px) {
+		.contenido {
+			grid-template-columns: repeat(2, 1fr);
+			align-items: center;
+		}
+	}
 </style>
