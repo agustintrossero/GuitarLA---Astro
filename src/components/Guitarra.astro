@@ -2,12 +2,11 @@
 export interface Props{
     nombre: String;
     descripcion: String;
-    url: String;
+    URL: String;
     precio: Number;
     imagen: String;
 }
-const {nombre, descripcion, precio, url, imagen} = Astro.props
-
+const {nombre, descripcion, precio, URL, imagen} = Astro.props
 ---
 
 <div class="guitarra">
@@ -16,7 +15,7 @@ const {nombre, descripcion, precio, url, imagen} = Astro.props
         <h3 class="heading">{nombre}</h3>
         <p class="descripcion">{descripcion}</p>
         <p class="precio">${precio}</p>
-        <a href={`/api/guitarras/${url}`} class="enlace">Ver producto</a>
+        <a href={`/guitarras/${URL}`} class="enlace">Ver producto</a>
     </div>
 </div>
 
