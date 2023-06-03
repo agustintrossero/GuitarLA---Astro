@@ -1,12 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Guitarra from '../components/Guitarra.astro';
+import Post from '../components/Post.astro';
 
+const urlGuitarras = `${import.meta.env.PUBLIC_API_URL}/api/guitarras?populate=imagen`
+const urlPosts = `${import.meta.env.PUBLIC_API_URL}/api/posts?populate=imagen`;
+
+const [resGuitarras, resPosts] = await Promise.all([
+	fetch(urlGuitarras),
+	fetch(urlPosts)
+])
+const [{data: guitarras}, {data: posts}] = await Promise.all([
+	resGuitarras.json(),
+	resPosts.json(),
+])
+//console.log(guitarras)
+//console.log(posts)
 ---
 
 <Layout title="Inicio" description="Pagina de Venta de Guitarras y cursos">
 	<main class="contenedor">
 		<div class="heading">Inicio</div>
+		<div class="grid">
+			{guitarras?.map(guitarra => (
+				<Guitarra
+				nombre = {guitarra.attributes.nombre}
+				descripcion ={guitarra.attributes.descripcion}
+				precio = {guitarra.attributes.precio}
+				imagen = {guitarra.attributes.imagen.data.attributes.formats.medium.url}
+				URL = {guitarra.attributes.URL}
+				/>
+			))}
+		</div>
 	</main>
+	<section class="contenedor">
+		<h2 class="heading">Blog</h2>
+		<div class="grid">
+			{posts?.map(post =>(
+				<Post
+					titulo = {post.attributes.titulo}
+					contenido = {post.attributes.contenido}
+					publishedAt = {post.attributes.publishedAt}
+					URL = {post.attributes.URL}
+					imagen = {post.attributes.imagen.data.attributes.formats.medium.url}
+				/>
+			))}
+		</div>
+	</section>
 </Layout>
 
 <style>
